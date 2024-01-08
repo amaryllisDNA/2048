@@ -46,8 +46,71 @@ body, html {
   width:150px;
   height:150px;
   border: 5px solid rgb(243,244,243);
-  background-color: bisque;
+  background-color: rgb(215, 231, 236);
   text-align:center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
   font-size: 4em;
+}
+
+.value-2 {
+  background-color: rgb(135, 206, 250); /* Sky Blue */
+  color: #333;
+}
+
+.value-4 {
+  background-color: rgb(144, 238, 144); /* Light Green */
+  color: #333;
+}
+
+.value-8 {
+  background-color: rgb(0, 128, 0); /* Green */
+  color: #f9f6f2;
+}
+
+.value-16 {
+  background-color: rgb(50, 205, 50); /* Lime Green */
+  color: #f9f6f2;
+}
+
+.value-32 {
+  background-color: rgb(173, 255, 47); /* Green Yellow */
+  color: #f9f6f2;
+}
+
+.value-64 {
+  background-color: rgb(218, 112, 214); /* Orchid */
+  color: #f9f6f2;
+}
+
+.value-128 {
+  background-color: rgb(148, 0, 211); /* Dark Violet */
+  color: #f9f6f2;
+}
+
+.value-256 {
+  background-color: rgb(0, 0, 205); /* Medium Blue */
+  color: #f9f6f2;
+}
+
+.value-512 {
+  background-color: rgb(0, 128, 128); /* Teal */
+  color: #f9f6f2;
+}
+
+.value-1024 {
+  background-color: rgb(0, 0, 139); /* Dark Blue */
+  color: #f9f6f2;
+}
+
+.value-2048 {
+  background-color: rgb(255, 20, 147); /* Deep Pink */
+  color: #f9f6f2;
+}
+
+#score{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: rgb(0, 0, 139);
+  margin-top: 10px;
 }

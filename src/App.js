@@ -12,7 +12,7 @@ class Square extends Component {
     render(){
 
       return(
-        <div className="square">{this.props.value}</div>
+        <div className={`square value-${this.props.value}`}>{this.props.value}</div>
       )
     }
 }
@@ -23,15 +23,15 @@ class App extends React.Component {
     this.state = {
       values :[[undefined,undefined,undefined,undefined],[undefined,undefined,undefined,undefined],[undefined,undefined,undefined,undefined],[undefined,undefined,undefined,undefined]],
       free : [[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[1,3],[2,0],[2,1],[2,2],[2,3],[3,0],[3,1],[3,2],[3,3]],
-      coordinates : [[0,0,false],[0,1,false],[0,2,false],[0,3,false],[1,0,false],[1,1,false],[1,2,false],[1,3,false],[2,0,false],[2,1,false],[2,2,false],[2,3,false],[3,0,false],[3,1,false],[3,2,false],[3,3,false]], 
+      score : 0,
       gameStarted : false,
-      slider : 'default', 
       obereParagraph :"Press 'Space' to play",
       stateReseter : {
         values :[[undefined,undefined,undefined,undefined],[undefined,undefined,undefined,undefined],[undefined,undefined,undefined,undefined],[undefined,undefined,undefined,undefined]],
         free : [[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[1,3],[2,0],[2,1],[2,2],[2,3],[3,0],[3,1],[3,2],[3,3]],
         gameStarted : false,
         obereParagraph :"Press 'Space' to play",
+        score : 0
       }
     }
   }
@@ -46,13 +46,12 @@ class App extends React.Component {
   handleKeyDown = (event)=>{
     if(event.keyCode ===32){
       if (!this.state.gameStarted){
-      this.setState({gameStarted:true})
-      this.newTile(this.state.values)
+        this.setState({values : this.state.stateReseter.values})
+        this.newTile(this.state.values)
+        this.setState({gameStarted:true})
     }else {
       console.log("Game has already started. Ignoring Space key.");
     }
-    
-
     } else if (this.state.gameStarted){
     if (event.keyCode ===37){
       this.slideTiles('left');
@@ -179,15 +178,14 @@ class App extends React.Component {
       }  
     this.setState ({free:updateStateFree}, ()=>{
        if (updateStateFree.length===0){
-        this.setState({obereParagraph : "No free tiles, game over !"})
+        this.setState({obereParagraph : "No free tiles, game over !", gameStarted : false})
     } else{
     const tileSelected = updateStateFree[Math.floor(Math.random()*updateStateFree.length)]
     const newValues = [...this.state.values];
     newValues[tileSelected[0]][tileSelected[1]]=2;
     updateStateFree = updateStateFree.filter(tile => !(tile[0]===tileSelected[0] && tile[1]===tileSelected[1]))
-    this.setState ({values : newValues, free:updateStateFree})
-
-    this.setState({obereParagraph :`Keep Going ! Tiles Free : ${updateStateFree.length}`})
+    let updateScore = this.state.score+stateValues.flat().filter(val => val!=undefined).reduce((a,b)=>a+b,0)
+    this.setState ({values : newValues, free:updateStateFree, obereParagraph :`Keep Going ! Tiles Free : ${updateStateFree.length}`, score : updateScore})
       }
     })
 
@@ -207,7 +205,8 @@ class App extends React.Component {
           ))
 
         })}</div>
-        <div id="direction-show">{this.state.slider}</div>
+        <div id="score">{`Score: ${this.state.score}`}</div>
+      
       </div>
     )
   }
